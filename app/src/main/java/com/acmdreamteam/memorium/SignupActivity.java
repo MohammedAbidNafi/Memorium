@@ -46,8 +46,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
-import com.theartofdev.edmodo.cropper.CropImage;
-import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
@@ -154,12 +152,12 @@ public class SignupActivity extends AppCompatActivity {
         loadingBar = new ProgressDialog(this);
 
 
-        edit_dp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onMediaSelect();
-            }
-        });
+//        edit_dp.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                onMediaSelect();
+//            }
+//        });
 
 
         submit.setOnClickListener(new View.OnClickListener() {
@@ -203,143 +201,143 @@ public class SignupActivity extends AppCompatActivity {
         }
     }
 
-    private void onMediaSelect(){
+//    private void onMediaSelect(){
+//
+//
+//        AppCompatButton gallery,camera;
+//
+//        CardView cancel;
+//
+//        dialog.setContentView(R.layout.add_image_pop_up);
+//
+//        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+//        Window window = dialog.getWindow();
+//        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+//        lp.copyFrom(window.getAttributes());
+//        //This makes the dialog take up the full width
+//        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+//        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+//        window.setAttributes(lp);
+//
+//
+//        dialog.setCancelable(true);
+//
+//
+//
+//        gallery = dialog.findViewById(R.id.gallery);
+//
+//        camera = dialog.findViewById(R.id.camera);
+//
+//        cancel = dialog.findViewById(R.id.cancel);
+//
+//        gallery.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+//                intent.setType("image/jpeg");
+//                intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+//                startActivityForResult(Intent.createChooser(intent, "Complete action using"),
+//                        RC_PHOTO_PICKER);
+//                dialog.dismiss();
+//            }
+//        });
+//
+//        camera.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(getApplicationContext(),"Camera!",Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//
+//        cancel.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                dialog.dismiss();
+//            }
+//        });
+//
+//
+//
+//
+//
+//
+//
+//        dialog.getWindow().setGravity(Gravity.BOTTOM);
+//        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+//        dialog.show();
+//    }
+//
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//
+//
+//        if (requestCode == RC_PHOTO_PICKER && resultCode == RESULT_OK && data != null) {
+//            Uri imageUri = data.getData();
+//            CropImage.activity(imageUri)
+//                    .setGuidelines(CropImageView.Guidelines.OFF)
+//                    .setAspectRatio(1, 1)
+//                    .start(this);
+//
+//        }
+//
+//        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+//
+//            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+//
+//            if (resultCode == RESULT_OK) {
+//                loadingBar.setTitle("Profile Image");
+//                loadingBar.setMessage("Please wait, while we update your profile picture...");
+//                loadingBar.show();
+//                loadingBar.setCanceledOnTouchOutside(false);
+//                assert result != null;
+//                Uri resultUri = result.getUri();
+//
+//                StorageReference filepath = storageReference.child(System.currentTimeMillis()
+//                        + "." + getFileExtension(resultUri));
+//
+//
+//                StorageTask uploadTask = filepath.putFile(resultUri);
+//                uploadTask.continueWithTask((Continuation<UploadTask.TaskSnapshot, Task<Uri>>) task -> {
+//                    if (!task.isSuccessful()) {
+//                        throw task.getException();
+//                    }
+//                    return filepath.getDownloadUrl();
+//                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<Uri> task) {
+//                        if (task.isSuccessful()) {
+//
+//                            Uri downloadUri = task.getResult();
+//                            assert downloadUri != null;
+//                            mUri = downloadUri.toString();
+//
+//
+//                            Glide.with(getApplicationContext()).load(mUri).into(profile_image);
+//
+//                            loadingBar.dismiss();
+//
+//
+//
+//                        }
+//                    }
+//                });
+//            } else {
+//                Toast.makeText(this, "Profile Picture updation is cancelled", Toast.LENGTH_SHORT).show();
+//                loadingBar.dismiss();
+//            }
+//
+//
+//        }
+//    }
 
-
-        AppCompatButton gallery,camera;
-
-        CardView cancel;
-
-        dialog.setContentView(R.layout.add_image_pop_up);
-
-        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-        Window window = dialog.getWindow();
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        lp.copyFrom(window.getAttributes());
-        //This makes the dialog take up the full width
-        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        window.setAttributes(lp);
-
-
-        dialog.setCancelable(true);
-
-
-
-        gallery = dialog.findViewById(R.id.gallery);
-
-        camera = dialog.findViewById(R.id.camera);
-
-        cancel = dialog.findViewById(R.id.cancel);
-
-        gallery.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("image/jpeg");
-                intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
-                startActivityForResult(Intent.createChooser(intent, "Complete action using"),
-                        RC_PHOTO_PICKER);
-                dialog.dismiss();
-            }
-        });
-
-        camera.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"Camera!",Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-
-
-
-
-
-
-
-        dialog.getWindow().setGravity(Gravity.BOTTOM);
-        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
-        dialog.show();
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-
-
-        if (requestCode == RC_PHOTO_PICKER && resultCode == RESULT_OK && data != null) {
-            Uri imageUri = data.getData();
-            CropImage.activity(imageUri)
-                    .setGuidelines(CropImageView.Guidelines.OFF)
-                    .setAspectRatio(1, 1)
-                    .start(this);
-
-        }
-
-        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-
-            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-
-            if (resultCode == RESULT_OK) {
-                loadingBar.setTitle("Profile Image");
-                loadingBar.setMessage("Please wait, while we update your profile picture...");
-                loadingBar.show();
-                loadingBar.setCanceledOnTouchOutside(false);
-                assert result != null;
-                Uri resultUri = result.getUri();
-
-                StorageReference filepath = storageReference.child(System.currentTimeMillis()
-                        + "." + getFileExtension(resultUri));
-
-
-                StorageTask uploadTask = filepath.putFile(resultUri);
-                uploadTask.continueWithTask((Continuation<UploadTask.TaskSnapshot, Task<Uri>>) task -> {
-                    if (!task.isSuccessful()) {
-                        throw task.getException();
-                    }
-                    return filepath.getDownloadUrl();
-                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Uri> task) {
-                        if (task.isSuccessful()) {
-
-                            Uri downloadUri = task.getResult();
-                            assert downloadUri != null;
-                            mUri = downloadUri.toString();
-
-
-                            Glide.with(getApplicationContext()).load(mUri).into(profile_image);
-
-                            loadingBar.dismiss();
-
-
-
-                        }
-                    }
-                });
-            } else {
-                Toast.makeText(this, "Profile Picture updation is cancelled", Toast.LENGTH_SHORT).show();
-                loadingBar.dismiss();
-            }
-
-
-        }
-    }
-
-    private String getFileExtension(Uri uri){
-        ContentResolver contentResolver = SignupActivity.this.getContentResolver();
-        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
-        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
-    }
+//    private String getFileExtension(Uri uri){
+//        ContentResolver contentResolver = SignupActivity.this.getContentResolver();
+//        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
+//        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
+//    }
 
     private void submit_Data() {
 
@@ -349,7 +347,7 @@ public class SignupActivity extends AppCompatActivity {
         user.put("username", username_.getText().toString());
         user.put("age",age_.getText().toString());
         user.put("gender",gender);
-        user.put("imageURL",mUri);
+//        user.put("imageURL",mUri);
 
 
         assert firebaseUser != null;
